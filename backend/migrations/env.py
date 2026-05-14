@@ -5,6 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
+from backend.models import * # noqa: F403
 from backend.database import Base
 from backend.config import settings
 
