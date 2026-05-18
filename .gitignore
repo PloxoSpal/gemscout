@@ -7,8 +7,9 @@ wheels/
 *.egg-info
 
 # Virtual environments
-.venv
+../../.venv
 .env
 
 #Pycharm idea
 .idea
+
