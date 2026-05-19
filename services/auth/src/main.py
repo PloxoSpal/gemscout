@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 import uvicorn
 
-from src.connectors.redis_connector import redis_manager
+from src.utils.redis_manager import redis_manager
 from src.api.auth import router as auth_router
 
 
