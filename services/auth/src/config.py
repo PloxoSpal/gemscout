@@ -26,11 +26,14 @@ class Settings(BaseSettings):
     #SMSC
     SMS_LOGIN: str | None
     SMS_PASSWORD: str
+    SMS_CODE_TTL_SECONDS: int = 300
+    SMS_CODE_MAX_ATTEMPTS: int = 5
 
     #JWT
-    JWT_SECRET_KEY = ...
-    JWT_ALGORITHM = ...
-    ACCESS_TOKEN_EXPIRE_MINUTES = 120
+    JWT_SECRET_KEY: str
+    JWT_ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 120
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 30
 
     @property
     def DB_URL(self):

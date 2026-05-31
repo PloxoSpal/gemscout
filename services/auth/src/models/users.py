@@ -20,15 +20,12 @@ class UserOrm(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
     phone: Mapped[str] = mapped_column(String(20), unique=True, nullable=False)
-    email: Mapped[str | None] = mapped_column(String(80), unique=True)
-
-    hash_password: Mapped[str] = mapped_column(String(100), nullable=False)
     role: Mapped[Role] = mapped_column(SAEnum(Role), nullable=False, default=Role.USER)
 
     is_2fa_enabled: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
-    totp_secret: Mapped[str | None] = mapped_column(String(255))
+    totp_secret: Mapped[str | None] = mapped_column(String(255), default=None, nullable=True)
 
-    is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
     is_blocked: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
 
     created_at: Mapped[datetime] = mapped_column(
@@ -45,4 +42,4 @@ class UserOrm(Base):
     )
 
     def __repr__(self) -> str:
-        return f"User id={self.id}, email={self.email}, phone={self.phone}, role={self.role}"
+        return f"User id={self.id}, phone={self.phone}, role={self.role}"

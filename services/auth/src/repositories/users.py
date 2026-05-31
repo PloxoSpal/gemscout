@@ -6,3 +6,5 @@ from src.repositories.mapper.users import UserMapper
 class UserRepository(BaseRepository):
     model = UserOrm
     mapper = UserMapper
+
+    

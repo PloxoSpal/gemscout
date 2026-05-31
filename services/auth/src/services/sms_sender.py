@@ -20,9 +20,6 @@ class SMSCProvider:
 
     async def send_sms(self, phone: str, code: str) -> str:
         if settings.MODE in ['TEST', 'DEV']:
-            print(settings.MODE)
-            print(f"SMS to {phone}: {code}")
-            print(f"Check result: {settings.MODE in ['TEST', 'DEV']}")
             return
 
         loop = asyncio.get_event_loop()
