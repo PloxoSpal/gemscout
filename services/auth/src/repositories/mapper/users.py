@@ -5,4 +5,4 @@ from src.schemas.users import UserResponse
 
 class UserMapper(DataMapper):
     db_model = UserOrm
-    schema =UserResponse
+    schema = UserResponse

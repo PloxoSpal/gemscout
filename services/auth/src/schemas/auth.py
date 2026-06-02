@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, field_validator
 
 class ResponseAuthCode(BaseModel):
     phone: str
-    code: int
+    code: str
 
     @field_validator('phone')
     @classmethod
@@ -13,3 +13,9 @@ class ResponseAuthCode(BaseModel):
         if not re.match(pattern, v):
             raise ValueError('Invalid phone number')
         return v
+
+class TokenPair(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str = "bearer"
+    expires_in: int
