@@ -13,6 +13,9 @@ from src.config import settings
 from src.utils.jwt_utils import issue_token_pair
 from src.utils.jwt_utils import decode_token
 
+from src.brokers.publisher import rabbitmq_manager
+from src.brokers.events import UserRegisteredEvent, USER_REGISTERED
+
 
 class AuthService:
     @staticmethod
@@ -51,6 +54,12 @@ class AuthService:
             new_user_data = UserCreateInternal(phone=auth_data.phone)
             user = await db.user.add(new_user_data)
             await db.commit()
+
+            body = UserRegisteredEvent(user_id=user.id, phone_number=auth_data.phone).model_dump_json().encode()
+            await rabbitmq_manager.publish(
+                routing_key=USER_REGISTERED,
+                body=body,
+            )
 
         return issue_token_pair(user.id)
 
